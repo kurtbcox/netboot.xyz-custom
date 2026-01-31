@@ -1,0 +1,7 @@
+#!ipxe
+
+set live_endpoint http://netboot.home.internal:8080
+set local_server http://netboot.home.internal
+set github_user kurtbcox
+#set menu change_menu
+#set menu custom-github

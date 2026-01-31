@@ -1,12 +1,66 @@
 #!ipxe
-###
-### netboot.xyz-custom menu
-###
+######## CUSTOM MENU ########
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+:custom_menu
+menu Custom Boot Options
+item --gap -- Custom Options:
+item custom_option1 Fedora43 Kickstart
+item deb_preseed Debian Trixie Preseed
+item --gap -- Tools:
+item custom_tool1 Custom Tool 1
+item --gap -- Return:
+item return Return to Main Menu
+choose --default return --timeout 300000 custom_target && goto ${custom_target}
 
-:custom_exit
-exit 0
+:custom_option1
+isset ${dhcp-server} && set ipparam ip=dhcp
+set ipparam BOOTIF=${netX/mac} ${ipparam}
+set install_mode inst.text
+set params inst.ks=http://${local_server}/ks/ks.cfg
+set fedora_mirror http://${local_server}/Fedora-Server-dvd-x86_64-43
+set cmdline
+goto fedora_boot
+
+:fedora_boot
+imgfree
+kernel ${fedora_mirror}/images/pxeboot/vmlinuz inst.repo=${fedora_mirror} ${install_mode} ${params} ${ipparam} initrd=initrd.magic ${cmdline}
+initrd ${fedora_mirror}/images/pxeboot/initrd.img
+echo
+echo MD5sums:
+md5sum vmlinuz initrd.img
+boot
+goto custom_menu
+
+:deb_preseed
+set debian_version trixie
+set debian_mirror ${local_server}/${debian_version}/debian-installer/amd64
+set preseedurl ${local_server}/${debian_version}/preseed.cfg
+set install_params auto=true priority=critical preseed/url=${preseedurl}
+set netcfg
+set mirrorcfg mirror/suite=${debian_version}
+set cmdline console=tty0
+goto deb_boot
+
+:deb_boot
+imgfree
+kernel ${debian_mirror}/linux ${install_params} ${netcfg} ${mirrorcfg} initrd=initrd.magic ${cmdline}
+initrd ${debian_mirror}/initrd.gz
+echo
+echo MD5sums:
+md5sum linux initrd.gz
+boot
+
+:custom_option2
+# Add your custom boot logic here
+echo Booting Custom Option 2...
+# Add your boot commands
+goto custom_menu
+
+:custom_tool1
+# Add your custom tool logic here
+echo Loading Custom Tool 1...
+# Add your tool commands
+goto custom_menu
+
+:return
+exit

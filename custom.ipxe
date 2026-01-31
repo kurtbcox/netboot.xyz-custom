@@ -16,8 +16,8 @@ choose --default return --timeout 300000 custom_target && goto ${custom_target}
 isset ${dhcp-server} && set ipparam ip=dhcp
 set ipparam BOOTIF=${netX/mac} ${ipparam}
 set install_mode inst.text
-set params inst.ks=http://${local_server}/ks/ks.cfg
-set fedora_mirror http://${local_server}/Fedora-Server-dvd-x86_64-43
+set params inst.ks=${local_server}/ks/ks.cfg
+set fedora_mirror ${local_server}/Fedora-Server-dvd-x86_64-43
 set cmdline
 goto fedora_boot
 

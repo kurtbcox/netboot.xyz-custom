@@ -4,7 +4,7 @@
 :custom_menu
 menu Custom Boot Options
 item --gap -- Custom Options:
-item custom_option1 Fedora43 Kickstart
+item fedora_ks Fedora43 Kickstart
 item deb_preseed Debian Trixie Preseed
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
@@ -12,7 +12,7 @@ item --gap -- Return:
 item return Return to Main Menu
 choose --default return --timeout 300000 custom_target && goto ${custom_target}
 
-:custom_option1
+:fedora_ks
 isset ${dhcp-server} && set ipparam ip=dhcp
 set ipparam BOOTIF=${netX/mac} ${ipparam}
 set install_mode inst.text

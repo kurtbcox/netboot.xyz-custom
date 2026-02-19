@@ -37,9 +37,6 @@ set install_params auto=true priority=critical preseed/url=${preseedurl}
 set netcfg
 set mirrorcfg mirror/suite=${debian_version}
 set cmdline console=tty0
-goto deb_boot
-
-:deb_boot
 imgfree
 kernel ${debian_mirror}/linux ${install_params} ${netcfg} ${mirrorcfg} initrd=initrd.magic ${cmdline}
 initrd ${debian_mirror}/initrd.gz

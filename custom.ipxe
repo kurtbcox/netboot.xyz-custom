@@ -20,9 +20,6 @@ set install_mode inst.text
 set params inst.ks=${local_server}/ks/ks.cfg
 set fedora_mirror ${local_server}/Fedora-Server-dvd-x86_64-43
 set cmdline
-goto fedora_boot
-
-:fedora_boot
 imgfree
 kernel ${fedora_mirror}/images/pxeboot/vmlinuz inst.repo=${fedora_mirror} ${install_mode} ${params} ${ipparam} initrd=initrd.magic ${cmdline}
 initrd ${fedora_mirror}/images/pxeboot/initrd.img

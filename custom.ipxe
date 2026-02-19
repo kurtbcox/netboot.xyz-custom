@@ -56,11 +56,11 @@ set openbsd_mirror ${local_server}
 set openbsd_base_dir pub/OpenBSD
 set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso
 imgfree
-#initrd ${src}
-#chain ${memdisk} iso raw
 dhcp
 set tftp-server ${next-server}
-chain http://${next-server}/OpenBSD/auto_install
+initrd ${src}
+chain ${memdisk} iso raw
+#chain http://${next-server}/OpenBSD/auto_install
 goto custom_menu
 
 :custom_option2

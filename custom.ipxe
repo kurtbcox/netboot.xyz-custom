@@ -4,7 +4,7 @@
 :custom_menu
 menu Custom Boot Options
 item --gap -- Custom Options:
-item fedora_ks Fedora43 Kickstart
+item fedora_kickstart Fedora43 Kickstart
 item deb_preseed Debian Trixie Preseed
 item openbsd_install OpenBSD 7.8 Install
 item --gap -- Tools:
@@ -13,7 +13,7 @@ item --gap -- Return:
 item return Return to Main Menu
 choose --default return --timeout 300000 custom_target && goto ${custom_target}
 
-:fedora_ks
+:fedora_kickstart
 isset ${dhcp-server} && set ipparam ip=dhcp
 set ipparam BOOTIF=${netX/mac} ${ipparam}
 set install_mode inst.text
@@ -56,11 +56,8 @@ set openbsd_mirror ${local_server}
 set openbsd_base_dir pub/OpenBSD
 set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso
 imgfree
-dhcp
-set tftp-server ${next-server}
 initrd ${src}
 chain ${memdisk} iso raw
-#chain http://${next-server}/OpenBSD/auto_install
 goto custom_menu
 
 :custom_option2

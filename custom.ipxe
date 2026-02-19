@@ -44,6 +44,7 @@ echo
 echo MD5sums:
 md5sum linux initrd.gz
 boot
+goto custom_menu
 
 :openbsd_78
 set os OpenBSD
@@ -55,6 +56,7 @@ set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.i
 imgfree
 initrd ${src}
 chain ${memdisk} iso raw
+goto custom_menu
 
 :custom_option2
 # Add your custom boot logic here

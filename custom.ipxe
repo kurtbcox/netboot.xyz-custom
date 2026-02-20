@@ -5,7 +5,7 @@
 menu Custom Boot Options
 item --gap -- Custom Options:
 item fedora_kickstart Fedora43 Kickstart
-item deb_preseed Debian Trixie Preseed
+item debian_preseed Debian Trixie Preseed
 item openbsd_install OpenBSD 7.8 Install
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
@@ -29,7 +29,7 @@ md5sum vmlinuz initrd.img
 boot
 goto custom_menu
 
-:deb_preseed
+:debian_preseed
 set debian_version trixie
 set debian_mirror ${local_server}/${debian_version}/debian-installer/amd64
 set preseedurl ${local_server}/${debian_version}/preseed.cfg

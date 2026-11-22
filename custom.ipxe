@@ -51,7 +51,7 @@ set os OpenBSD
 set ver 8.0
 set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
-iseq ${ver} 7.8 && set image_ver 78
+iseq ${ver} 8.0 && set image_ver 80
 set openbsd_mirror ${local_server}
 set openbsd_base_dir pub/OpenBSD
 set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso

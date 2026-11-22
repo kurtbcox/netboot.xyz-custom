@@ -6,7 +6,7 @@ menu Custom Boot Options
 item --gap -- Custom Options:
 item fedora_kickstart Fedora43 Kickstart
 item debian_preseed Debian Trixie Preseed
-item openbsd_install OpenBSD 7.8 Install
+item openbsd_install OpenBSD 8.0 Install
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
 item --gap -- Return:
@@ -48,7 +48,7 @@ goto custom_menu
 
 :openbsd_install
 set os OpenBSD
-set ver 7.8
+set ver 8.0
 set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 iseq ${ver} 7.8 && set image_ver 78

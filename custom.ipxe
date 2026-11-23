@@ -6,7 +6,7 @@ menu Custom Boot Options
 item --gap -- Custom Options:
 item fedora_kickstart Fedora43 Kickstart
 item debian_preseed Debian Trixie Preseed
-item openbsd_install OpenBSD 8.0 Install
+item openbsd_install OpenBSD ${openbsd_rel} Install
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
 item --gap -- Return:
@@ -48,10 +48,12 @@ goto custom_menu
 
 :openbsd_install
 set os OpenBSD
-set ver 8.0
+set ver ${openbsd_rel}
 set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 iseq ${ver} 8.0 && set image_ver 80
+iseq ${ver} 7.9 && set image_ver 79
+iseq ${ver} 7.8 && set image_ver 78
 set openbsd_mirror ${local_server}
 set openbsd_base_dir pub/OpenBSD
 set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso

@@ -49,7 +49,9 @@ goto custom_menu
 :openbsd_install
 set os OpenBSD
 set ver 8.0
+echo ${ver}
 set os_arch ${arch}
+echo ${os_arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 iseq ${ver} 8.0 && set image_ver 80
 iseq ${ver} 7.9 && set image_ver 79

@@ -6,7 +6,7 @@ menu Custom Boot Options
 item --gap -- Custom Options:
 item fedora_kickstart Fedora43 Kickstart
 item debian_preseed Debian Trixie Preseed
-item openbsd_install OpenBSD ${openbsd_rel} Install
+item openbsd_install OpenBSD Install
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
 item --gap -- Return:

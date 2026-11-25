@@ -31,6 +31,7 @@ goto custom_menu
 
 :debian_preseed
 set debian_version ${local_debian_version}
+echo ${debian_version}
 set debian_mirror ${local_server}/${debian_version}/debian-installer/amd64
 set preseedurl ${local_server}/${debian_version}/preseed.cfg
 set install_params auto=true priority=critical preseed/url=${preseedurl}

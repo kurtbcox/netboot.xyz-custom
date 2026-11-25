@@ -6,7 +6,7 @@ menu Custom Boot Options
 item --gap -- Custom Options:
 item fedora_kickstart Fedora43 Kickstart
 item debian_preseed Preseed Debian - ${local_debian_version}
-item openbsd_install Install OpenBSD ${openbsd_rel}
+item openbsd_install Install OpenBSD ${local_openbsd_rel}
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
 item --gap -- Return:
@@ -49,18 +49,16 @@ goto custom_menu
 
 :openbsd_install
 set os OpenBSD
-set ver ${openbsd_rel}
+set ver ${local_openbsd_rel}
 echo ${ver}
-set image_ver ${openbsd_image_rel}
-echo ${image_ver}
+set openbsd_image ${local_openbsd_img}
+echo ${openbsd_image}
 set os_arch ${arch}
-echo ${os_arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 echo ${os_arch}
 set openbsd_mirror ${local_server}
-set openbsd_base_dir pub/OpenBSD
-echo ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso
-set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/cd${image_ver}.iso
+set openbsd_base_dir pub/${os}
+set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/${openbsd_image}
 imgfree
 initrd ${src}
 chain ${memdisk} iso raw

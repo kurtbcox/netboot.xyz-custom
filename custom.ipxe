@@ -49,13 +49,12 @@ goto custom_menu
 :openbsd_install
 set os OpenBSD
 set ver ${openbsd_rel}
+set image_ver ${openbsd_image_rel}
 echo ${ver}
 set os_arch ${arch}
 echo ${os_arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 iseq ${ver} 8.0 && set image_ver 80
-iseq ${ver} 7.9 && set image_ver 79
-iseq ${ver} 7.8 && set image_ver 78
 echo ${image_ver}
 set openbsd_mirror ${local_server}
 set openbsd_base_dir pub/OpenBSD

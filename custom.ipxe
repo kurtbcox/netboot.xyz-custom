@@ -73,6 +73,7 @@ set base-url ${local_server}/ubuntu
 kernel ${base-url}/casper/vmlinuz
 initrd ${base-url}/casper/initrd
 imgargs vmlinuz initrd=initrd \
+ root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null \
  ip=dhcp \
  iso-url=${local_server}/ubuntu/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso \
  fsck.mode=skip \

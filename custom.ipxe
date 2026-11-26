@@ -4,9 +4,10 @@
 :custom_menu
 menu Custom Boot Options
 item --gap -- Custom Options:
-item fedora_kickstart Fedora43 Kickstart
-item debian_preseed Preseed Debian - ${local_debian_version}
+item fedora_kickstart Kickstart Fedora ${local_fedora_verison}
+item debian_preseed Preseed Debian ${local_debian_version}
 item openbsd_install Install OpenBSD ${local_openbsd_rel}
+item ubuntu_autoinstall Autoinstall Ubuntu ${local_ubuntu_version}
 item --gap -- Tools:
 item custom_tool1 Custom Tool 1
 item --gap -- Return:
@@ -62,6 +63,26 @@ set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${os_arch}/${openbsd_image}
 imgfree
 initrd ${src}
 chain ${memdisk} iso raw
+goto custom_menu
+
+:ubuntu_autoinstall
+set os_arch ${arch}
+iseq ${os_arch} x86_64 && set os_arch amd64
+echo ${os_arch}
+set base-url ${local_server}/ubuntu
+kernel ${base-url}/casper/vmlinuz
+initrd ${base-url}/casper/initrd
+imgargs vmlinuz initrd=initrd \
+ ip=dhcp \
+ iso-url=${local_server}/ubuntu/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso \
+ fsck.mode=skip \
+ layerfs-path=minimal.standard.live.squashfs \
+ autoinstall \
+ 'ds=nocloud-net;s=${local_server}/ubuntu/' \
+echo
+echo MD5sums:
+md5sum vmlinuz initrd
+boot
 goto custom_menu
 
 :custom_option2

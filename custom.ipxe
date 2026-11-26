@@ -70,14 +70,11 @@ set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 echo ${os_arch}
 set base-url ${local_server}/ubuntu
-kernel ${base-url}/casper/vmlinuz
+set ubuntu_iso_url ${base-url}/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso
+set install_params root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null ip=dhcp
+set auto_install autoinstall ds=nocloud-net;s=${base-url}/ url=${ubuntu_iso_url}
+kernel ${base-url}/casper/vmlinuz ${install_params} ${auto_install}
 initrd ${base-url}/casper/initrd
-imgargs vmlinuz initrd=initrd \
- root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null \
- ip=dhcp \
- url=${base-url}/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso \
- autoinstall \
- 'ds=nocloud-net;s=${base-url}/' \
 echo
 echo MD5sums:
 md5sum vmlinuz initrd

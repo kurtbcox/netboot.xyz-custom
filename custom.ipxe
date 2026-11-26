@@ -73,8 +73,9 @@ set base_url ${local_server}/ubuntu
 set ubuntu_iso_url ${base_url}/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso
 set install_params root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null ip=dhcp
 set auto_install autoinstall ds=nocloud-net;s=${base_url}/ url=${ubuntu_iso_url}
-kernel ${base_url}/casper/vmlinuz ${install_params} ${auto_install} -- quiet initrd=initrd
-initrd ${base_url}/casper/initrd
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/26.04-c43af979/
+kernel ${kernel_url}vmlinuz ${install_params} ${auto_install} initrd=initrd.magic
+initrd ${kernel_url}initrd
 echo
 echo MD5sums:
 md5sum vmlinuz initrd

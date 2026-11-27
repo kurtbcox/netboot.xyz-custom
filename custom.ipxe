@@ -72,8 +72,8 @@ echo ${os_arch}
 set base_url ${local_server}/ubuntu
 set ubuntu_iso_url ${base_url}/ubuntu-${local_ubuntu_version}-live-server-${os_arch}.iso
 set ubuntu_iso_url2 ${base_url}/ubuntu-26.04-live-server-${os_arch}.iso
-set install_params root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null ip=dhcp
-set auto_install autoinstall ds=nocloud-net;s=${base_url}/ url=${ubuntu_iso_url2}
+set install_params root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null ip=dhcp url=${ubuntu_iso_url2}
+set auto_install autoinstall ds=nocloud-net;s=${base_url}/
 set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/26.04-c43af979/
 set kernel_url2 ${local_server}/ubuntu/casper/
 echo kernel ${kernel_url}vmlinuz ${install_params} ${auto_install} initrd=initrd.magic

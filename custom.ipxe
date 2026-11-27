@@ -66,6 +66,7 @@ chain ${memdisk} iso raw
 goto custom_menu
 
 :ubuntu_autoinstall
+imgfree
 set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch amd64
 echo ${os_arch}
@@ -79,9 +80,11 @@ set kernel_url2 ${local_server}/ubuntu/casper/
 echo kernel ${kernel_url2}vmlinuz ${install_params} ${auto_install} initrd=initrd.magic
 kernel ${kernel_url2}vmlinuz ${install_params} ${auto_install} initrd=initrd.magic
 initrd ${kernel_url2}initrd
+imgstat
 echo
 echo MD5sums:
 md5sum vmlinuz initrd
+sleep 10
 boot
 goto custom_menu
 

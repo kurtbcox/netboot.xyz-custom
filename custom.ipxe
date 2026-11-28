@@ -4,7 +4,7 @@
 :custom_menu
 menu Custom Boot Options
 item --gap -- Custom Options:
-item fedora_kickstart Kickstart Fedora ${local_fedora_verison}
+item fedora_kickstart Kickstart Fedora ${local_fedora_version}
 item debian_preseed Preseed Debian ${local_debian_version}
 item openbsd_install Install OpenBSD ${local_openbsd_rel}
 item ubuntu_autoinstall Autoinstall Ubuntu ${local_ubuntu_version}
@@ -18,8 +18,8 @@ choose --default return --timeout 300000 custom_target && goto ${custom_target}
 isset ${dhcp-server} && set ipparam ip=dhcp
 set ipparam BOOTIF=${netX/mac} ${ipparam}
 set install_mode inst.text
-set params inst.ks=${local_server}/ks/ks.cfg
-set fedora_mirror ${local_server}/Fedora-Server-dvd-x86_64-43
+set params inst.ks=${local_server}/fedora/ks.cfg
+set fedora_mirror ${local_server}/fedora/Fedora-Server-dvd-x86_64-${local_fedora_version}
 set cmdline
 imgfree
 kernel ${fedora_mirror}/images/pxeboot/vmlinuz inst.repo=${fedora_mirror} ${install_mode} ${params} ${ipparam} initrd=initrd.magic ${cmdline}
@@ -76,7 +76,6 @@ set ubuntu_iso_url2 http://192.168.230.160/ubuntu/ubuntu-26.04-live-server-${os_
 set install_params root=/dev/ram0 ramdisk_size=3500000 cloud-config-url=/dev/null ip=dhcp url=${ubuntu_iso_url}
 set auto_install autoinstall ds=nocloud-net;s=${base_url}/
 set kernel_url ${local_server}/ubuntu/casper
-#echo kernel ${kernel_url}/vmlinuz ${install_params} ${auto_install} initrd=initrd.magic
 kernel ${kernel_url}/vmlinuz ${install_params} ${auto_install} initrd=initrd.magic
 initrd ${kernel_url}/initrd
 imgstat
